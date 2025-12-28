@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Донат в игру</title>
   <style>
     body {
@@ -13,6 +13,8 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
     }
 
     header {
@@ -29,58 +31,46 @@
     header p {
       margin-top: 10px;
       opacity: 0.8;
+      font-size: 18px;
+    }
+
+    #countdown {
+      margin-top: 25px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #00ffae;
+      text-shadow: 0 0 10px rgba(0,255,174,0.5);
     }
 
     .container {
       flex: 1;
-      max-width: 1200px;
-      margin: 0 auto 60px;
-      padding: 0 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    .donate-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
+      padding: 0 20px 60px;
       width: 100%;
     }
 
     .card {
-      position: relative;
       background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.03));
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
       border-radius: 24px;
-      padding: 30px 25px 35px;
+      padding: 40px 30px;
       text-align: center;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
-      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      max-width: 350px;
+      width: 100%;
     }
 
     .card:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.8);
-    }
-
-    .card:hover::before {
-      opacity: 1;
+      box-shadow: 0 35px 80px rgba(0,0,0,0.8);
     }
 
     .card h2 {
-      margin: 0;
       font-size: 28px;
+      margin: 0;
     }
 
     .price {
@@ -88,13 +78,13 @@
       font-size: 34px;
       font-weight: 700;
       color: #00ffae;
-      text-shadow: 0 0 15px rgba(0, 255, 174, 0.4);
+      text-shadow: 0 0 15px rgba(0,255,174,0.4);
     }
 
     .card p {
       font-size: 15px;
       opacity: 0.85;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
     .card a {
@@ -110,13 +100,13 @@
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0, 255, 200, 0.4);
+      box-shadow: 0 10px 30px rgba(0,255,200,0.4);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .card button:hover {
       transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(0, 255, 200, 0.6);
+      box-shadow: 0 15px 40px rgba(0,255,200,0.6);
     }
 
     footer {
@@ -131,38 +121,17 @@
   <header>
     <h1>Донат в мою игру</h1>
     <p>Поддержи проект и получи эксклюзив</p>
-    <div id="countdown" style="margin-top:25px;font-size:22px;font-weight:600;">
-      Обнова выйдет через: <span id="time">--:--:--</span>
-    </div>
+    <div id="countdown">Обнова выйдет через: <span id="time">--:--:--</span></div>
   </header>
 
   <div class="container">
-    <div class="donate-grid">
-      <div class="card">
-        <h2>Exclusive Pack</h2>
-        <div class="price">1900 R$</div>
-        <p>Эксклюзивный донат-пак для поддержки игры</p>
-        <a href="https://www.roblox.com/game-pass/1646827844/Exclusive-Pack" target="_blank">
-          <button>Купить за Robux</button>
-        </a>
-      </div>
-        <p>Небольшой бонус для старта в игре</p>
-        <button onclick="donate('starter')">Задонатить</button>
-      </div>
-
-      <div class="card">
-        <h2>Pro Pack</h2>
-        <div class="price">150 ₽</div>
-        <p>Больше валюты и редкий предмет</p>
-        <button onclick="donate('pro')">Задонатить</button>
-      </div>
-
-      <div class="card">
-        <h2>Legend Pack</h2>
-        <div class="price">300 ₽</div>
-        <p>Максимальные бонусы и эксклюзив</p>
-        <button onclick="donate('legend')">Задонатить</button>
-      </div>
+    <div class="card">
+      <h2>Exclusive Pack</h2>
+      <div class="price">1900 R$</div>
+      <p>Эксклюзивный донат-пак для поддержки игры</p>
+      <a href="https://www.roblox.com/game-pass/1646827844/Exclusive-Pack" target="_blank" rel="noopener noreferrer">
+        <button>Купить за Robux</button>
+      </a>
     </div>
   </div>
 
@@ -171,19 +140,16 @@
   </footer>
 
   <script>
-    function donate(type) {
-      alert('Вы выбрали донат: ' + type + '\n\nТут нужно подключить платежку (Fondy, WayForPay, Stripe и т.д.)');
-    }
-  </script>
-  <script>
+    // Таймер обратного отсчета
     const releaseDate = new Date('2026-01-06T00:00:00').getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = releaseDate - now;
 
+      const timeEl = document.getElementById('time');
       if (distance <= 0) {
-        document.getElementById('time').innerText = 'ОБНОВА ДОСТУПНА!';
+        timeEl.innerText = 'ОБНОВА ДОСТУПНА!';
         return;
       }
 
@@ -192,7 +158,7 @@
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-      document.getElementById('time').innerText = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
+      timeEl.innerText = `${days}д ${hours}ч ${minutes}м ${seconds}с`;
     }
 
     setInterval(updateCountdown, 1000);
